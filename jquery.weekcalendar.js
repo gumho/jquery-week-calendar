@@ -517,6 +517,9 @@
         return this._addDays(this.getCurrentFirstDay(), this.options.daysToShow - 1);
       },
 
+      scrollToHour: function(hour) {
+        this._scrollToHour(hour);
+      },
       /*********************
         * private functions *
         *********************/
