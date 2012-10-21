@@ -57,6 +57,7 @@
         minDate: null,
         maxDate: null,
         showHeader: true,
+        showColumnHeaderDate: true,
         buttons: true,
         buttonText: {
           today: 'today',
@@ -2620,7 +2621,12 @@
           return options.getHeaderDate(date, this.element);
         }
         var dayName = options.useShortDayNames ? options.shortDays[date.getDay()] : options.longDays[date.getDay()];
-        return dayName + (options.headerSeparator) + this._formatDate(date, options.dateFormat);
+        if(options.showColumnHeaderDate) {
+          return dayName + (options.headerSeparator) + this._formatDate(date, options.dateFormat);  
+        } else {
+          return dayName;
+        }
+        
       },
 
 
