@@ -517,8 +517,8 @@
         return this._addDays(this.getCurrentFirstDay(), this.options.daysToShow - 1);
       },
 
-      scrollToHour: function(hour) {
-        this._scrollToHour(hour);
+      scrollToHour: function(hour, animate) {
+        this._scrollToHour(hour, animate);
       },
       /*********************
         * private functions *
@@ -1945,18 +1945,18 @@
             }
           }
 
-          var $target = this.element.find('.wc-grid-timeslot-header .wc-hour-header:eq(' + slot + ')');
 
-          $scrollable.animate({scrollTop: 0}, 0, function() {
-            var targetOffset = $target.offset().top;
-            var scroll = targetOffset - $scrollable.offset().top - $target.outerHeight();
-            if (animate) {
-              $scrollable.animate({scrollTop: scroll}, options.scrollToHourMillis);
-            }
-            else {
-              $scrollable.animate({scrollTop: scroll}, 0);
-            }
-          });
+          //scroll to the hour plus some padding so that hour is in middle of viewport
+          var hourHeaderHeight = this.element.find(".wc-grid-timeslot-header .wc-hour-header").outerHeight();
+          var calHeight = this.element.find(".wc-scrollable-grid").outerHeight();
+          var scroll = (hourHeaderHeight * slot) - calHeight/3;
+          
+          if (animate) {
+            $scrollable.animate({scrollTop: scroll}, options.scrollToHourMillis);
+          }
+          else {
+            $scrollable.animate({scrollTop: scroll}, 0);
+          }
       },
 
       /*
